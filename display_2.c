@@ -6,20 +6,17 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 16:07:05 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/06 16:17:45 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/12 15:57:27 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void		ft_print_dir(t_file *lst, t_opt* opt)
+void		ft_print_dir(t_file *lst, t_opt *opt, t_file *start)
 {
-	t_file	*start;
-	t_file	*tmp;
-
-	if (count_files(first) == 1 && !lst->dir && !lst->erref)
+	if (count_files(start) == 1 && !lst->dir && !lst->erref)
 		return ;
-	if (count_files(first) > 1)
+	if (count_files(start) > 1)
 	{
 		ft_putstr(lst->name);
 		ft_putendl(":");
@@ -30,36 +27,33 @@ void		ft_print_dir(t_file *lst, t_opt* opt)
 		return ;
 	}
 	start = lst;
-	while (lst->dir)
-	{
-		tmp = lst->dir;
-		if (!lst->dir->erref)
-			display_line(lst->dir, opt, start);
-		lst->dir = lst->dir->next;
-		lst_free_one(tmp);
-	}
+	print_listed(lst->dir, opt);
 }
 
 void		print_list(t_file *lst, t_opt *opt)
 {
 	t_file	*start;
+	int		flag;
 
-	start = lst;
-	while (start)
-	{
-		if (start->erref && !S_ISDIR(start->infos->st_mode))
-			print_errors(start);
-		start = start->next;
-	}
+	flag = 0;
 	start = lst;
 	while (lst)
 	{
-		if (!S_ISDIR(lst->infos->st_mode) && !lst->erref)
-			display_line(lst, opt, start);
+		if (lst->erref && !S_ISDIR(lst->infos->st_mode))
+			print_errors(lst);
 		lst = lst->next;
 	}
 	lst = start;
-	if (!last_dir(start))
+	while (lst)
+	{
+		if (!S_ISDIR(lst->infos->st_mode) && !lst->erref)
+		{
+			display_line(lst, opt, start);
+			flag = 1;
+		}
+		lst = lst->next;
+	}
+	if (flag)
 		ft_putchar('\n');
 }
 
@@ -84,7 +78,7 @@ int			last_dir(t_file *lst)
 
 int			count_files(t_file *lst)
 {
-	int 		count;
+	int			count;
 	t_file		*start;
 
 	start = lst;

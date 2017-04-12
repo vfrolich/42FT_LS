@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 10:26:22 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/06 11:26:22 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/12 11:20:30 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef	struct			s_file
 	struct s_file		*next;
 	struct s_file		*dir;
 	int					erref;
-	int					hidden;
 }						t_file;
 
 typedef struct			s_opt
@@ -44,8 +43,6 @@ typedef struct			s_opt
 	int					t;
 }						t_opt;
 
-t_file					*first;
-
 t_file					*ft_listnew(char *name);
 t_file					*lst_add(t_file *new, t_file *start);
 t_file					*ft_create_lst(DIR *dirp, t_file *lst, char *base_dir);
@@ -54,8 +51,8 @@ char					ft_get_type(struct stat *filestat);
 char					*ft_get_rights(struct stat *filestat);
 int						get_total_size(t_file *lst);
 t_file					*ft_fill_info(t_file *lst, char *base_dir);
-t_file					*fill_file(t_file *lst);
-t_file					*fill_dir(t_file *lst, DIR *dirptr);
+t_file					*fill_file(t_file *lst, t_opt *opt);
+t_file					*fill_dir(t_file *lst, DIR *dirptr, t_opt *opt);
 t_file					*rd_dir(DIR *dirptr);
 int						fill_stats(t_file *lst);
 void					ft_print_lst(t_file *lst);
@@ -65,9 +62,9 @@ char					*display_fill(struct stat *filestat, t_file *lst);
 void					read_link_path(t_file *lst);
 void					ft_print_recursive(t_file *lst);
 void					print_listed(t_file *lst, t_opt *opt);
-void					recursive_listed(t_file	*lst);
+void					recursive_listed(t_file	*lst, t_opt *opt);
 void					print_errors(t_file *lst);
-void					ft_print_dir(t_file *lst, t_opt *opt);
+void					ft_print_dir(t_file *lst, t_opt *opt, t_file *start);
 void					print_dir_one(t_file *lst, t_opt *opt);
 void					print_list(t_file *lst, t_opt *opt);
 int						check_for_empty(t_file *lst);
@@ -95,6 +92,7 @@ t_file					*sort_r_list_t(t_file *lst);
 int						all_same_t(t_file *lst);
 void					arg_handle(int argc, char **argv);
 void					simple_ft_ls();
+void					current_ls(t_opt* opt);
 t_file					*get_files(DIR *dirp, char *base_dir);
 void					lst_free_one(t_file *lst);
 void					free_lst(t_file *lst);
@@ -103,7 +101,7 @@ t_opt					*opt_init(void);
 int						opt_check(char *av);
 void					vanilla_ls(t_file *lst, t_opt *opt);
 t_file					*sort_handle(t_file *lst, t_opt *opt);
-void					display_infos(t_file *lst, t_opt *opt, t_file *start);
+void					display_infos(t_file *lst, t_file *start);
 void					display_line(t_file *lst, t_opt *opt, t_file *start);
 
 #endif

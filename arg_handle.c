@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 18:00:29 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/06 15:35:34 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/12 15:55:58 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ int			opt_check(char *av)
 	tmp = av;
 	if (*tmp == '-' && *(tmp + 1) == '-' && !*(tmp + 2))
 		simple_ft_ls(".");
-	if (av[0] != '-')
+	if (av[0] != '-' || (av[0] == '-' && !av[1]))
 		return (1);
 	if (*av == '-')
 	{
 		av++;
 		while (*av)
 		{
-			if (*av != 'a' && *av != 'l' && *av != 'R' && *av != 'r' && 
+			if (*av != 'a' && *av != 'l' && *av != 'R' && *av != 'r' &&
 				*av != 't')
 			{
 				ft_putstr_fd("ft_ls: illegal option -- ", 2);
@@ -95,7 +95,7 @@ void		simple_ft_ls(char *dir)
 		ft_putstr_fd(dir, 2);
 		ft_putstr_fd(": ", 2);
 		ft_putendl_fd(strerror(errno), 2);
-		exit(1) ;
+		exit(1);
 	}
 	lst = get_files(dirptr, dir);
 	start = lst;

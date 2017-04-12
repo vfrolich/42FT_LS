@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 11:43:30 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/03/27 15:45:21 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/10 17:53:23 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ t_file		*ft_listnew(char *name)
 		exit(1);
 	}
 	new->erref = 0;
-	new->hidden = 0;
 	new->path = NULL;
 	new->dir = NULL;
 	new->next = NULL;

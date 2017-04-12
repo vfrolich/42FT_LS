@@ -6,18 +6,38 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 10:23:08 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/06 17:04:32 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/12 15:50:26 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+
+
+void	current_ls(t_opt *opt)
+{
+	t_file	*lst;
+	DIR		*dirptr;	
+
+	lst = ft_listnew(".");
+	lst->path = ft_strdup(lst->name);
+	dirptr = opendir(".");
+	lst->erref = fill_stats(lst);
+	if (!opt->recurs)
+		lst->dir = fill_dir(lst, dirptr, opt);
+	else
+		lst->dir = ft_create_lst(dirptr, lst, ".");
+	lst = sort_handle(lst, opt);
+	vanilla_ls(lst, opt);
+	free_lst(lst);
+}
 
 int main(int argc, char **argv)
 {
 	t_opt	*options = NULL;
 	// DIR 	*dirptr;
 	t_file 	*lst;	
-	t_file	*start;
+	// t_file	*start;
 
 	if (argc < 2)
 	{
@@ -32,14 +52,14 @@ int main(int argc, char **argv)
 			options = opt_fill(argv[1]);			
 			argv++;
 		}
-		if (*argv)
+		argv++;
+		if (!*argv)
+			current_ls(options);
+		else
 		{
-		start = arg_to_lst(argv);
-		lst = start;
-		lst = fill_file(lst);
-		lst = start;
+		lst = arg_to_lst(argv);
+		lst = fill_file(lst, options);
 		lst = sort_handle(lst, options);
-		first = lst;
 		vanilla_ls(lst, options);
 		free_lst(lst);
 		}

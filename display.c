@@ -6,11 +6,16 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 14:22:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/06 16:19:21 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/12 15:53:53 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+// void	recursive_attempt(t_file *lst, t_opt *opt)
+// {
+		
+// }
 
 void	vanilla_ls(t_file *lst, t_opt *opt)
 {
@@ -18,35 +23,42 @@ void	vanilla_ls(t_file *lst, t_opt *opt)
 
 	start = lst;
 	print_list(lst, opt);
-	if (start->dir && !start->next)
+	if (start->dir && !start->next && !opt->recurs)
 	{
 		print_dir_one(start->dir, opt);
 		return ;
 	}
-	lst = start;
-	while (start)
+	while (lst)
 	{
-		if (S_ISDIR(start->infos->st_mode))
+		if (!lst->erref)
 		{
-			ft_print_dir(start, opt);
-			if (!last_dir(start))
-				ft_putchar('\n');
+			if (S_ISDIR(lst->infos->st_mode) && !opt->recurs)
+			{
+				ft_print_dir(lst, opt, start);
+				if (!last_dir(lst))
+					ft_putchar('\n');
+			}
+			else if (S_ISDIR(lst->infos->st_mode) && opt->recurs)
+			{
+				ft_putstr(lst->path);
+				ft_putendl(":");
+				vanilla_ls(lst, opt);
+			}
 		}
- 		start = start->next;
+ 		lst = lst->next;
 	}
 }
 
-// void	recursive_listed(t_file *lst)
+// void	recursive_listed(t_file *lst ,t_opt *opt)
 // {
-// 	lst = sort_list(lst);
-// 	print_listed(lst);
+// 	print_listed(lst, opt);
 // 	while (lst)
 // 	{
 // 		if (lst->dir && lst->name[0] != '.')
 // 		{
 // 			ft_putstr(lst->path);
 // 			ft_putendl(":");
-// 			recursive_listed(lst->dir);
+// 			recursive_listed(lst->dir, opt);
 // 		}
 // 		if (!lst->dir && lst->erref)
 // 		{
@@ -73,8 +85,9 @@ int		check_for_empty(t_file *lst)
 void	print_listed(t_file *lst, t_opt *opt)
 {
 	t_file	*start;
-	t_file	*tmp;
 
+	if (lst)
+		lst = sort_handle(lst, opt);
 	start = lst;
 	if (!check_for_empty(lst) && opt->list)
 	{
@@ -84,13 +97,9 @@ void	print_listed(t_file *lst, t_opt *opt)
 	}
 	while (lst)
 	{
-		tmp = lst;
 		display_line(lst, opt, start);
 		lst = lst->next;
-		lst_free_one(tmp);
 	}
-	lst = start;
-	ft_putchar('\n');
 }
 
 void	print_errors(t_file *lst)

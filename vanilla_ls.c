@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 20:18:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/06 16:13:09 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/12 16:00:52 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,13 @@ t_file	*arg_to_lst(char **argv)
 	t_file	*new;
 	t_file	*tmp;
 
-	argv++;
 	start = ft_listnew(*argv);
-	if (start->name[0] == '.')
-		start->hidden = 1;
 	start->path = ft_strdup(start->name);
 	tmp = start;
 	argv++;
 	while (*argv)
 	{
 		new = ft_listnew(*argv);
-		if (new->name[0] == '.')
-			new->hidden = 1;
 		new->path = ft_strdup(new->name);
 		tmp->next = new;
 		tmp = new;
@@ -38,7 +33,7 @@ t_file	*arg_to_lst(char **argv)
 	return (start);
 }
 
-t_file	*fill_file(t_file *lst)
+t_file	*fill_file(t_file *lst, t_opt *opt)
 {
 	t_file			*start;
 	DIR				*dirptr;
@@ -53,21 +48,24 @@ t_file	*fill_file(t_file *lst)
 			if (!(dirptr = opendir(lst->path)))
 				lst->erref = errno;
 			else
-				lst->dir = fill_dir(lst, dirptr);
+				lst->dir = fill_dir(lst, dirptr, opt);
 		}
 		lst = lst->next;
 	}
 	return (start);
 }
 
-t_file	*fill_dir(t_file *lst, DIR *dirptr)
+t_file	*fill_dir(t_file *lst, DIR *dirptr, t_opt *opt)
 {
 	t_file	*start;
 	t_file	*new;
 	t_file	*tmp;
 
-	readdir(dirptr);
-	readdir(dirptr);
+	if (!opt->all)
+	{
+ 		readdir(dirptr);
+		readdir(dirptr);
+	}
 	if (!(start = rd_dir(dirptr)))
 		return (NULL);
 	start->path = ft_get_path(start, lst, NULL);
@@ -75,10 +73,10 @@ t_file	*fill_dir(t_file *lst, DIR *dirptr)
 	tmp = start;
 	while ((new = rd_dir(dirptr)))
 	{
-			new->path = ft_get_path(new, lst, NULL);
-			new->erref = fill_stats(new);
-			tmp->next = new;
-			tmp = new;
+		new->path = ft_get_path(new, lst, NULL);
+		new->erref = fill_stats(new);
+		tmp->next = new;
+		tmp = new;
 	}
 	closedir(dirptr);
 	return (start);
@@ -108,11 +106,5 @@ int		fill_stats(t_file *lst)
 {
 	errno = 0;
 	lstat(lst->path, lst->infos);
-	if (errno)
-	{
-		print_errors(lst);
-		free(lst->infos);
-		lst->infos = NULL;
-	}
 	return (errno);
 }
