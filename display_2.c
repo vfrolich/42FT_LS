@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 16:07:05 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/12 15:57:27 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/13 15:21:11 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		ft_print_dir(t_file *lst, t_opt *opt, t_file *start)
 		return ;
 	if (count_files(start) > 1)
 	{
-		ft_putstr(lst->name);
+		ft_putstr(lst->path);
 		ft_putendl(":");
 	}
 	if (S_ISDIR(lst->infos->st_mode) && lst->erref)
@@ -26,8 +26,32 @@ void		ft_print_dir(t_file *lst, t_opt *opt, t_file *start)
 		print_errors(lst);
 		return ;
 	}
-	start = lst;
 	print_listed(lst->dir, opt);
+	while (lst->dir)
+	{
+		if (recursable(lst->dir, opt))
+			ft_print_dir_r(lst->dir, opt);
+		lst->dir = lst->dir->next;
+	}
+}
+
+void		ft_print_dir_r(t_file *lst, t_opt *opt)
+{
+	ft_putchar('\n');
+	ft_putstr(lst->path);
+	ft_putendl(":");
+	if (S_ISDIR(lst->infos->st_mode) && lst->erref)
+	{
+		print_errors(lst);
+		return ;
+	}
+	print_listed(lst->dir, opt);
+	while (lst->dir)
+	{
+		if (recursable(lst->dir, opt))
+			ft_print_dir_r(lst->dir, opt);
+		lst->dir = lst->dir->next;
+	}
 }
 
 void		print_list(t_file *lst, t_opt *opt)

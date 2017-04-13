@@ -6,13 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 10:23:08 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/12 15:50:26 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/13 16:45:42 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-
 
 void	current_ls(t_opt *opt)
 {
@@ -26,7 +24,7 @@ void	current_ls(t_opt *opt)
 	if (!opt->recurs)
 		lst->dir = fill_dir(lst, dirptr, opt);
 	else
-		lst->dir = ft_create_lst(dirptr, lst, ".");
+		lst->dir = ft_create_lst(dirptr, lst, ".", opt);
 	lst = sort_handle(lst, opt);
 	vanilla_ls(lst, opt);
 	free_lst(lst);

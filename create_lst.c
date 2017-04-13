@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 11:43:30 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/10 17:53:23 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/13 17:08:05 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_file		*ft_listnew(char *name)
 	return (new);
 }
 
-t_file		*ft_create_lst(DIR *dirp, t_file *lst, char *base_dir)
+t_file		*ft_create_lst(DIR *dirp, t_file *lst, char *base_dir, t_opt *opt)
 {
 	t_file			*start;
 	t_file			*new;
@@ -49,31 +49,34 @@ t_file		*ft_create_lst(DIR *dirp, t_file *lst, char *base_dir)
 	dinfo = readdir(dirp);
 	start = ft_listnew(dinfo->d_name);
 	start->path = ft_get_path(start, lst, base_dir);
-	start->dir = ft_fill_info(start, base_dir);
+	start->dir = ft_fill_info(start, base_dir, opt);
 	tmp = start;
 	while ((dinfo = readdir(dirp)))
 	{
 		new = ft_listnew(dinfo->d_name);
 		new->path = ft_get_path(new, lst, base_dir);
-		new->dir = ft_fill_info(new, base_dir);
+		new->dir = ft_fill_info(new, base_dir ,opt);
 		tmp->next = new;
 		tmp = new;
 	}
 	return (start);
 }
 
-t_file		*ft_fill_info(t_file *lst, char *base_dir)
+t_file		*ft_fill_info(t_file *lst, char *base_dir, t_opt *opt)
 {
 	DIR				*dirp;
 
 	lstat(lst->path, lst->infos);
-	if (S_ISDIR(lst->infos->st_mode) && lst->name[0] != '.')
+	if ((lst->name[0] == '.' && !opt->all ) || 
+		(!ft_strcmp(lst->name, ".") || !ft_strcmp(lst->name, "..")))
+		return (NULL);
+	if (S_ISDIR(lst->infos->st_mode))
 	{
 		errno = 0;
 		dirp = opendir(lst->path);
 		if (dirp)
 		{
-			lst->dir = ft_create_lst(dirp, lst, base_dir);
+			lst->dir = ft_create_lst(dirp, lst, base_dir, opt);
 			closedir(dirp);
 			return (lst->dir);
 		}

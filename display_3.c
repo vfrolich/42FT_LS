@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 14:33:43 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/12 16:00:12 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/13 15:36:53 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	display_line(t_file *lst, t_opt *opt, t_file *start)
 {
-	if (lst->erref)
-		return ;
 	if (lst->name[0] == '.')
 	{
 		if (opt->all && !opt->list)

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 10:26:22 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/12 11:20:30 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/13 16:44:49 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ typedef struct			s_opt
 
 t_file					*ft_listnew(char *name);
 t_file					*lst_add(t_file *new, t_file *start);
-t_file					*ft_create_lst(DIR *dirp, t_file *lst, char *base_dir);
+t_file					*ft_create_lst(DIR *dirp, t_file *lst, char *base_dir, t_opt *opt);
 t_file					*arg_to_lst(char **argv);
 char					ft_get_type(struct stat *filestat);
 char					*ft_get_rights(struct stat *filestat);
 int						get_total_size(t_file *lst);
-t_file					*ft_fill_info(t_file *lst, char *base_dir);
+t_file					*ft_fill_info(t_file *lst, char *base_dir, t_opt *opt);
 t_file					*fill_file(t_file *lst, t_opt *opt);
 t_file					*fill_dir(t_file *lst, DIR *dirptr, t_opt *opt);
 t_file					*rd_dir(DIR *dirptr);
@@ -65,6 +65,7 @@ void					print_listed(t_file *lst, t_opt *opt);
 void					recursive_listed(t_file	*lst, t_opt *opt);
 void					print_errors(t_file *lst);
 void					ft_print_dir(t_file *lst, t_opt *opt, t_file *start);
+void					ft_print_dir_r(t_file *lst, t_opt *opt);
 void					print_dir_one(t_file *lst, t_opt *opt);
 void					print_list(t_file *lst, t_opt *opt);
 int						check_for_empty(t_file *lst);
@@ -103,5 +104,5 @@ void					vanilla_ls(t_file *lst, t_opt *opt);
 t_file					*sort_handle(t_file *lst, t_opt *opt);
 void					display_infos(t_file *lst, t_file *start);
 void					display_line(t_file *lst, t_opt *opt, t_file *start);
-
+int						recursable(t_file *lst, t_opt *opt);
 #endif
