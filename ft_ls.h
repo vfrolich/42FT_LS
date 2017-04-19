@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 10:26:22 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/13 16:44:49 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/19 18:06:12 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct			s_opt
 }						t_opt;
 
 t_file					*ft_listnew(char *name);
-t_file					*lst_add(t_file *new, t_file *start);
+void					lst_add(t_file *new, t_file **start);
 t_file					*ft_create_lst(DIR *dirp, t_file *lst, char *base_dir, t_opt *opt);
 t_file					*arg_to_lst(char **argv);
 char					ft_get_type(struct stat *filestat);

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:06:14 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/12 15:30:32 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/19 13:09:47 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*display_fill(struct stat *filestat, t_file *lst)
 	{
 
 		str = listed_add_groups(filestat, lst);
-		max = get_largest_size(lst) + 2;
+		max = get_largest_size(lst);
 		time = ft_itoa(filestat->st_size);
 		tmp = padd_it(time, max);
 		ft_strdel(&time);

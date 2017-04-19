@@ -6,16 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 14:22:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/13 17:30:11 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/19 18:02:39 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-// void	recursive_attempt(t_file *lst, t_opt *opt)
-// {
-		
-// }
 
 void	vanilla_ls(t_file *lst, t_opt *opt)
 {
@@ -92,25 +87,3 @@ void	print_errors(t_file *lst)
 	ft_putstr_fd(": ", 2);
 	ft_putendl_fd(strerror(lst->erref), 2);
 }
-
-// void	recursive_listed(t_file *lst ,t_opt *opt)
-// {
-// 	print_listed(lst, opt);
-// 	while (lst)
-// 	{
-// 		if (lst->dir && lst->name[0] != '.')
-// 		{
-// 			ft_putstr(lst->path);
-// 			ft_putendl(":");
-// 			recursive_listed(lst->dir, opt);
-// 		}
-// 		if (!lst->dir && lst->erref)
-// 		{
-// 			ft_putstr(lst->path);
-// 			ft_putendl(":");
-// 			print_errors(lst);
-// 			ft_putchar('\n');
-// 		}
-// 		lst = lst->next;
-// 	}
-// }

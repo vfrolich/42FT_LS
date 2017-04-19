@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 11:43:30 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/13 17:08:05 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/19 18:04:11 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,23 @@ t_file		*ft_listnew(char *name)
 	new->dir = NULL;
 	new->next = NULL;
 	return (new);
+}
+
+void    lst_add(t_file *new, t_file **start)
+{
+	t_file *tmp;
+
+	tmp = *start;
+	if	(!new)
+		return ;
+	if (!tmp)
+	{
+		*start = new;
+		return ;
+	}
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
 }
 
 t_file		*ft_create_lst(DIR *dirp, t_file *lst, char *base_dir, t_opt *opt)
