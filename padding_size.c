@@ -6,14 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:08:36 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/12 15:30:55 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/27 16:56:04 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include "stdio.h"
 
-size_t		get_largest_links(t_file *lst)
+size_t			get_largest_links(t_file *lst)
 {
 	size_t		largest;
 
@@ -30,7 +29,7 @@ size_t		get_largest_links(t_file *lst)
 	return (largest);
 }
 
-size_t		get_largest_user(t_file *lst)
+size_t				get_largest_user(t_file *lst)
 {
 	size_t			largest;
 	struct passwd	*uid;
@@ -56,14 +55,14 @@ size_t		get_largest_user(t_file *lst)
 	return (largest);
 }
 
-size_t		get_largest_group(t_file *lst)
+size_t				get_largest_group(t_file *lst)
 {
 	size_t			largest;
 	struct group	*g_id;
 
 	largest = 0;
 	if (lst->infos)
-	{	
+	{
 		g_id = getgrgid(lst->infos->st_gid);
 		if (g_id)
 			largest = ft_strlen(g_id->gr_name);

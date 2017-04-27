@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 20:18:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/13 17:41:23 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/27 16:53:23 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_file	*fill_dir(t_file *lst, DIR *dirptr, t_opt *opt)
 
 	if (!opt->all)
 	{
- 		readdir(dirptr);
+		readdir(dirptr);
 		readdir(dirptr);
 	}
 	if (!(start = rd_dir(dirptr)))

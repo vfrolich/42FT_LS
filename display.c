@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 14:22:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/19 18:02:39 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/27 16:58:03 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	vanilla_ls(t_file *lst, t_opt *opt)
 				ft_print_dir(lst, opt, start);
 				if (!last_dir(lst))
 					ft_putchar('\n');
-			}	
+			}
 		}
- 		lst = lst->next;
+		lst = lst->next;
 	}
 }
 
@@ -70,7 +70,7 @@ void	print_listed(t_file *lst, t_opt *opt)
 	if (!check_for_empty(lst) && opt->list)
 	{
 		ft_putstr("total ");
-		ft_putnbr(get_total_size(start));		
+		ft_putnbr(get_total_size(start));
 		ft_putchar('\n');
 	}
 	while (lst)

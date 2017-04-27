@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 10:23:08 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/13 16:45:42 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/27 16:56:32 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ int main(int argc, char **argv)
 {
 	t_opt	*options = NULL;
 	// DIR 	*dirptr;
-	t_file 	*lst;	
-	// t_file	*start;
+	t_file 	*lst;
 
 	if (argc < 2)
 	{
@@ -62,18 +61,5 @@ int main(int argc, char **argv)
 		free_lst(lst);
 		}
 	}
-		// if (!(dirptr = opendir(argv[1])))
-		// {
-		// 	ft_putstr_fd("ft_ls: ", 2);
-		// 	ft_putstr_fd(argv[1], 2);
-		// 	ft_putstr_fd(": ", 2);
-		// 	ft_putendl_fd(strerror(errno), 2);
-		// 	return (-1);
-		// }
-		// lst = ft_create_lst(dirptr, NULL, argv[1]);
-		// closedir(dirptr);
-		// start = lst;
-		// recursive_listed(lst);
-		// free_lst(start);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 16:02:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/06 16:48:00 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/27 14:47:04 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,3 @@ size_t	get_largest_min(t_file *lst)
 		largest = 0;
 	return (largest);
 }
-
-// t_file	*lst_add(t_file *new, t_file *start)
-// {
-// 	if (!start)
-// 	{
-// 		start = new;
-// 		return (start);
-// 	}
-// 	while (start->next)
-// 		start = start->next;
-// 	start->next = new;
-// 	return (start);
-// }

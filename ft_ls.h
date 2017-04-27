@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 10:26:22 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/19 18:06:12 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/27 17:18:31 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,15 @@ typedef struct			s_opt
 
 t_file					*ft_listnew(char *name);
 void					lst_add(t_file *new, t_file **start);
-t_file					*ft_create_lst(DIR *dirp, t_file *lst, char *base_dir, t_opt *opt);
+t_file					*ft_create_lst(DIR *dirp, t_file *lst,
+						char *base_dir, t_opt *opt);
 t_file					*arg_to_lst(char **argv);
 char					ft_get_type(struct stat *filestat);
 char					*ft_get_rights(struct stat *filestat);
+char					*time_check(struct stat *filestat, char *str);
 int						get_total_size(t_file *lst);
+t_file					*check_for_opt(char *name, t_opt *opt,
+						char *base_dir, t_file *lst);
 t_file					*ft_fill_info(t_file *lst, char *base_dir, t_opt *opt);
 t_file					*fill_file(t_file *lst, t_opt *opt);
 t_file					*fill_dir(t_file *lst, DIR *dirptr, t_opt *opt);
@@ -93,7 +97,7 @@ t_file					*sort_r_list_t(t_file *lst);
 int						all_same_t(t_file *lst);
 void					arg_handle(int argc, char **argv);
 void					simple_ft_ls();
-void					current_ls(t_opt* opt);
+void					current_ls(t_opt *opt);
 t_file					*get_files(DIR *dirp, char *base_dir);
 void					lst_free_one(t_file *lst);
 void					free_lst(t_file *lst);

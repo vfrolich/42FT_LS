@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 11:43:30 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/19 18:04:11 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/27 16:59:09 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@ t_file		*ft_listnew(char *name)
 	return (new);
 }
 
-void    lst_add(t_file *new, t_file **start)
+void		lst_add(t_file *new, t_file **start)
 {
 	t_file *tmp;
 
-	tmp = *start;
-	if	(!new)
+	tmp = NULL;
+	if (!new)
 		return ;
+	if (start)
+		tmp = *start;
 	if (!tmp)
 	{
 		*start = new;
@@ -60,21 +62,15 @@ t_file		*ft_create_lst(DIR *dirp, t_file *lst, char *base_dir, t_opt *opt)
 {
 	t_file			*start;
 	t_file			*new;
-	t_file			*tmp;
 	struct dirent	*dinfo;
 
 	dinfo = readdir(dirp);
-	start = ft_listnew(dinfo->d_name);
-	start->path = ft_get_path(start, lst, base_dir);
-	start->dir = ft_fill_info(start, base_dir, opt);
-	tmp = start;
+	start = check_for_opt(dinfo->d_name, opt, base_dir, lst);
+	lst_add(NULL, &start);
 	while ((dinfo = readdir(dirp)))
 	{
-		new = ft_listnew(dinfo->d_name);
-		new->path = ft_get_path(new, lst, base_dir);
-		new->dir = ft_fill_info(new, base_dir ,opt);
-		tmp->next = new;
-		tmp = new;
+		new = check_for_opt(dinfo->d_name, opt, base_dir, lst);
+		lst_add(new, &start);
 	}
 	return (start);
 }
@@ -84,10 +80,10 @@ t_file		*ft_fill_info(t_file *lst, char *base_dir, t_opt *opt)
 	DIR				*dirp;
 
 	lstat(lst->path, lst->infos);
-	if ((lst->name[0] == '.' && !opt->all ) || 
+	if ((lst->name[0] == '.' && !opt->all) ||
 		(!ft_strcmp(lst->name, ".") || !ft_strcmp(lst->name, "..")))
 		return (NULL);
-	if (S_ISDIR(lst->infos->st_mode))
+	if (S_ISDIR(lst->infos->st_mode) && opt->recurs)
 	{
 		errno = 0;
 		dirp = opendir(lst->path);

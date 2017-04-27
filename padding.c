@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:06:14 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/19 13:09:47 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/04/27 16:42:54 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,7 @@ char	*display_fill(struct stat *filestat, t_file *lst)
 		str = ft_strjoin_free_one(&str, tmp);
 		ft_strdel(&tmp);
 	}
-	time = ctime(&filestat->st_mtime);
-	str = ft_strjoin_free_one(&str, " ");
-	tmp = ft_strsub(time, 4, 12);
-	str = ft_strjoin_free(&str, &tmp);
+	str = time_check(filestat, str);
 	return (str);
 }
 
