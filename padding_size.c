@@ -6,15 +6,15 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:08:36 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/27 16:56:04 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/05 17:11:52 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-size_t			get_largest_links(t_file *lst)
+size_t				get_largest_links(t_file *lst)
 {
-	size_t		largest;
+	size_t			largest;
 
 	largest = 0;
 	if (lst->infos)
@@ -75,17 +75,17 @@ size_t				get_largest_group(t_file *lst)
 			if (g_id)
 				if (ft_strlen(g_id->gr_name) > largest)
 					largest = ft_strlen(g_id->gr_name);
-		}	
+		}
 		lst = lst->next;
 	}
 	return (largest);
 }
 
-size_t		get_largest_size(t_file *lst)
+size_t				get_largest_size(t_file *lst)
 {
-	size_t	largest;
-	char	*tmp2;
-	t_file	*ltmp;
+	size_t			largest;
+	char			*tmp2;
+	t_file			*ltmp;
 
 	ltmp = lst;
 	largest = 0;

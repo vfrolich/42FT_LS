@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:06:14 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/27 16:42:54 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/05 17:10:33 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,10 @@ char	*display_fill(struct stat *filestat, t_file *lst)
 	char	*time;
 	char	*tmp;
 
-
 	if (S_ISBLK(filestat->st_mode) || S_ISCHR(filestat->st_mode))
 		str = get_min_maj(filestat, lst);
 	else
 	{
-
 		str = listed_add_groups(filestat, lst);
 		max = get_largest_size(lst);
 		time = ft_itoa(filestat->st_size);

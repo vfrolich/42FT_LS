@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 10:23:08 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/27 16:56:32 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/05 17:09:18 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	current_ls(t_opt *opt)
 {
 	t_file	*lst;
-	DIR		*dirptr;	
+	DIR		*dirptr;
 
 	lst = ft_listnew(".");
 	lst->path = ft_strdup(lst->name);
@@ -30,36 +30,42 @@ void	current_ls(t_opt *opt)
 	free_lst(lst);
 }
 
-int main(int argc, char **argv)
+void	ft_ls(char **argv, t_opt *opt, int i)
 {
-	t_opt	*options = NULL;
-	// DIR 	*dirptr;
-	t_file 	*lst;
+	t_file	*lst;
+
+	while (i > 0)
+	{
+		i--;
+		argv++;
+	}
+	lst = arg_to_lst(argv);
+	lst = fill_file(lst, opt);
+	lst = sort_handle(lst, opt);
+	vanilla_ls(lst, opt);
+	free_lst(lst);
+}
+
+int		main(int argc, char **argv)
+{
+	t_opt	*options;
+	int		i;
 
 	if (argc < 2)
 	{
 		simple_ft_ls(".");
 		return (0);
 	}
-	else
+	i = 1;
+	options = opt_init();
+	while (i < argc && !opt_check(argv[i]))
 	{
-		options = opt_init();		
-		if (!opt_check(argv[1]))
-		{
-			options = opt_fill(argv[1]);			
-			argv++;
-		}
-		argv++;
-		if (!*argv)
-			current_ls(options);
-		else
-		{
-		lst = arg_to_lst(argv);
-		lst = fill_file(lst, options);
-		lst = sort_handle(lst, options);
-		vanilla_ls(lst, options);
-		free_lst(lst);
-		}
+		options = opt_fill(argv[i], options);
+		i++;
 	}
+	if (i == argc)
+		current_ls(options);
+	else
+		ft_ls(argv, options, i);
 	return (0);
 }

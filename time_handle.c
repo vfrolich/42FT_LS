@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 14:35:49 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/27 16:53:44 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/05 17:12:21 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_file		*sort_handle(t_file *lst, t_opt *opt)
 
 char		*time_check(struct stat *filestat, char *str)
 {
-	time_t 	t;
+	time_t	t;
 	char	*time_str;
 	char	*tmp;
 

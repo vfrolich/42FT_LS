@@ -6,17 +6,14 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 18:00:29 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/12 15:55:58 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/05 17:07:52 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_opt		*opt_fill(char *argv)
+t_opt		*opt_fill(char *argv, t_opt *options)
 {
-	t_opt	*options;
-
-	options = opt_init();
 	if (*argv != '-')
 		return (options);
 	while (*argv)
