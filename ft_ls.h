@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 10:26:22 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/05 13:38:25 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:18:23 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void					ft_print_dir(t_file *lst, t_opt *opt, t_file *start);
 void					ft_print_dir_r(t_file *lst, t_opt *opt);
 void					print_dir_one(t_file *lst, t_opt *opt);
 void					print_list(t_file *lst, t_opt *opt);
-int						check_for_empty(t_file *lst);
+int						check_for_empty(t_file *lst, t_opt *opt);
 int						last_dir(t_file *lst);
 int						count_files(t_file *lst);
 char					*ft_get_path(t_file *lst, t_file *dir, char *base_dir);

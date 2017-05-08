@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 14:22:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/27 16:58:03 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/05 18:17:47 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ int		recursable(t_file *lst, t_opt *opt)
 	return (1);
 }
 
-int		check_for_empty(t_file *lst)
+int		check_for_empty(t_file *lst, t_opt *opt)
 {
+	if (opt->all)
+		return (0);
 	while (lst)
 	{
 		if (ft_strcmp(lst->name, ".") && ft_strcmp(lst->name, ".."))
@@ -67,7 +69,7 @@ void	print_listed(t_file *lst, t_opt *opt)
 	if (lst)
 		lst = sort_handle(lst, opt);
 	start = lst;
-	if (!check_for_empty(lst) && opt->list)
+	if (!check_for_empty(lst, opt) && opt->list)
 	{
 		ft_putstr("total ");
 		ft_putnbr(get_total_size(start));

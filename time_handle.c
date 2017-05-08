@@ -6,12 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 14:35:49 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/05 17:12:21 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/08 17:42:52 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdio.h>
 
 t_file		*sort_handle(t_file *lst, t_opt *opt)
 {
@@ -30,7 +29,7 @@ char		*time_check(struct stat *filestat, char *str)
 	char	*time_str;
 	char	*tmp;
 
-	time_str = ctime(&filestat->st_mtime);
+	time_str = ctime(&filestat->st_mtimespec.tv_nsec);
 	str = ft_strjoin_free_one(&str, " ");
 	t = time(NULL);
 	if (filestat->st_mtime > t || (t - filestat->st_mtime) > 15724800)
