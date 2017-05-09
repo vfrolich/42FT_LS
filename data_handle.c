@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 13:54:40 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/09 15:24:31 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/09 19:47:09 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int		get_total_size(t_file *lst, t_opt *opt)
 			if (opt->all)
 				total = total + lst->infos->st_blocks;
 		}
-		else 
+		else
 			total = total + lst->infos->st_blocks;
 		lst = lst->next;
 	}
