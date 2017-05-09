@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:08:36 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/05 17:11:52 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/09 17:15:32 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,18 +90,14 @@ size_t				get_largest_size(t_file *lst)
 	ltmp = lst;
 	largest = 0;
 	tmp2 = ft_itoa(lst->infos->st_size);
-	if (lst->name[0] != '.')
-		largest = ft_strlen(tmp2);
+	largest = ft_strlen(tmp2);
 	ft_strdel(&tmp2);
 	while (lst)
 	{
-		if (lst->name[0] != '.')
-		{
-			tmp2 = ft_itoa(lst->infos->st_size);
-			if (ft_strlen(tmp2) > largest)
-				largest = ft_strlen(tmp2);
-			ft_strdel(&tmp2);
-		}
+		tmp2 = ft_itoa(lst->infos->st_size);
+		if (ft_strlen(tmp2) > largest)
+			largest = ft_strlen(tmp2);
+		ft_strdel(&tmp2);
 		lst = lst->next;
 	}
 	largest = largest + get_largest_min(ltmp) + get_largest_maj(ltmp);

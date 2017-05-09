@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 14:22:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/05 18:17:47 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/09 15:25:20 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	vanilla_ls(t_file *lst, t_opt *opt)
 					ft_putchar('\n');
 			}
 		}
+		if (lst->erref && S_ISDIR(lst->infos->st_mode))
+			print_errors(lst);
 		lst = lst->next;
 	}
 }
@@ -72,7 +74,7 @@ void	print_listed(t_file *lst, t_opt *opt)
 	if (!check_for_empty(lst, opt) && opt->list)
 	{
 		ft_putstr("total ");
-		ft_putnbr(get_total_size(start));
+		ft_putnbr(get_total_size(start, opt));
 		ft_putchar('\n');
 	}
 	while (lst)

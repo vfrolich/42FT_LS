@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 13:54:40 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/06 16:09:57 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/09 15:24:31 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*ft_get_rights(struct stat *filestat)
 	return (str);
 }
 
-int		get_total_size(t_file *lst)
+int		get_total_size(t_file *lst, t_opt *opt)
 {
 	int		total;
 	t_file	*start;
@@ -69,7 +69,12 @@ int		get_total_size(t_file *lst)
 	start = lst;
 	while (lst)
 	{
-		if (lst->name[0] != '.' && lst->erref == 0)
+		if (lst->name[0] == '.')
+		{
+			if (opt->all)
+				total = total + lst->infos->st_blocks;
+		}
+		else 
 			total = total + lst->infos->st_blocks;
 		lst = lst->next;
 	}

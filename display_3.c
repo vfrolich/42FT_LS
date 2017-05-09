@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 14:33:43 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/05 18:15:23 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/09 15:25:01 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	print_dir_one(t_file *lst, t_opt *opt)
 	if (!check_for_empty(lst, opt) && opt->list)
 	{
 		ft_putstr("total ");
-		ft_putnbr(get_total_size(start));
+		ft_putnbr(get_total_size(start, opt));
 		ft_putchar('\n');
 	}
 	while (lst)

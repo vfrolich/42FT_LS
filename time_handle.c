@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 14:35:49 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/08 17:42:52 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/09 18:31:52 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char		*time_check(struct stat *filestat, char *str)
 	char	*time_str;
 	char	*tmp;
 
-	time_str = ctime(&filestat->st_mtimespec.tv_nsec);
+	time_str = ctime(&filestat->st_mtime);
 	str = ft_strjoin_free_one(&str, " ");
 	t = time(NULL);
 	if (filestat->st_mtime > t || (t - filestat->st_mtime) > 15724800)

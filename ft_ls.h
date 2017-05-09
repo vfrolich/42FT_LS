@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 10:26:22 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/05 18:18:23 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/09 19:28:51 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_file					*arg_to_lst(char **argv);
 char					ft_get_type(struct stat *filestat);
 char					*ft_get_rights(struct stat *filestat);
 char					*time_check(struct stat *filestat, char *str);
-int						get_total_size(t_file *lst);
+int						get_total_size(t_file *lst, t_opt *opt);
 t_file					*check_for_opt(char *name, t_opt *opt,
 						char *base_dir, t_file *lst);
 t_file					*ft_fill_info(t_file *lst, char *base_dir, t_opt *opt);
@@ -94,7 +94,6 @@ int						sorted_list_t(t_file *lst);
 t_file					*sort_list_t(t_file *lst);
 int						sorted_r_list_t(t_file *lst);
 t_file					*sort_r_list_t(t_file *lst);
-int						all_same_t(t_file *lst);
 void					arg_handle(int argc, char **argv);
 void					simple_ft_ls();
 void					current_ls(t_opt *opt);
