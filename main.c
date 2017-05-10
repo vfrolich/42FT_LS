@@ -6,12 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 10:23:08 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/09 19:21:36 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/10 14:28:23 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdio.h>
 
 void	current_ls(t_opt *opt)
 {

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 16:06:14 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/05 17:10:33 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/10 11:50:41 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ char	*listed_display(struct stat *filestat, t_file *lst)
 	tmp2 = ft_itoa(filestat->st_nlink);
 	tmp = padd_it(tmp2, max);
 	ft_strdel(&tmp2);
-	str = ft_strjoin_free_one(&str, tmp);
-	ft_strdel(&tmp);
+	str = ft_strjoin_free(&str, &tmp);
 	str = ft_strjoin_free_one(&str, " ");
 	max = get_largest_user(lst) + 2;
 	uid = getpwuid(filestat->st_uid);
@@ -66,8 +65,7 @@ char	*display_fill(struct stat *filestat, t_file *lst)
 		time = ft_itoa(filestat->st_size);
 		tmp = padd_it(time, max);
 		ft_strdel(&time);
-		str = ft_strjoin_free_one(&str, tmp);
-		ft_strdel(&tmp);
+		str = ft_strjoin_free(&str, &tmp);
 	}
 	str = time_check(filestat, str);
 	return (str);

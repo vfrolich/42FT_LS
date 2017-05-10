@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 11:43:30 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/09 16:28:31 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/10 12:14:47 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_file		*ft_create_lst(DIR *dirp, t_file *lst, char *base_dir, t_opt *opt)
 		new = check_for_opt(dinfo->d_name, opt, base_dir, lst);
 		lst_add(new, &start);
 	}
+	closedir(dirp);
 	return (start);
 }
 
@@ -90,7 +91,6 @@ t_file		*ft_fill_info(t_file *lst, char *base_dir, t_opt *opt)
 		if (dirp)
 		{
 			lst->dir = ft_create_lst(dirp, lst, base_dir, opt);
-			closedir(dirp);
 			return (lst->dir);
 		}
 		lst->erref = errno;

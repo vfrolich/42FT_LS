@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 11:30:27 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/27 17:17:10 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/10 14:19:44 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void		lst_free_one(t_file *lst)
 {
 	ft_strdel(&lst->name);
 	ft_strdel(&lst->path);
-	if (lst->infos)
-		free(lst->infos);
+	free(lst->infos);
 	lst->next = NULL;
 	if (lst->dir)
 		free_lst(lst->dir);

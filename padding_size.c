@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 18:08:36 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/09 17:15:32 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/10 12:02:40 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,24 @@
 size_t				get_largest_links(t_file *lst)
 {
 	size_t			largest;
+	char			*tmp;
 
 	largest = 0;
 	if (lst->infos)
-		largest = ft_strlen(ft_itoa(lst->infos->st_nlink));
+	{
+		tmp = ft_itoa(lst->infos->st_nlink);
+		largest = ft_strlen(tmp);
+		ft_strdel(&tmp);
+	}
 	while (lst)
 	{
 		if (lst->infos)
-			if (largest < ft_strlen(ft_itoa(lst->infos->st_nlink)))
-				largest = ft_strlen(ft_itoa(lst->infos->st_nlink));
+		{
+			tmp = ft_itoa(lst->infos->st_nlink);
+			if (largest < ft_strlen(tmp))
+				largest = ft_strlen(tmp);
+			ft_strdel(&tmp);
+		}
 		lst = lst->next;
 	}
 	return (largest);
