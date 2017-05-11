@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 16:07:05 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/10 13:10:22 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/11 18:24:16 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,13 @@ void		ft_print_dir_r(t_file *lst, t_opt *opt)
 
 void		print_list(t_file *lst, t_opt *opt)
 {
-	t_file	*start;
+	t_padd	*padding;
 	int		flag;
+	t_file	*start;
 
 	flag = 0;
 	start = lst;
+	padding = padding_init(lst);
 	while (lst)
 	{
 		if (lst->erref && !S_ISDIR(lst->infos->st_mode))
@@ -80,7 +82,7 @@ void		print_list(t_file *lst, t_opt *opt)
 	{
 		if (!S_ISDIR(lst->infos->st_mode) && !lst->erref)
 		{
-			display_line(lst, opt, start);
+			display_line(lst, opt, padding);
 			flag = 1;
 		}
 		lst = lst->next;

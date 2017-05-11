@@ -6,29 +6,26 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 16:02:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/04/27 14:47:04 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/11 15:20:47 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-char	*get_min_maj(struct stat *filestat, t_file *lst)
+char	*get_min_maj(struct stat *filestat, t_padd *padding)
 {
 	char	*tmp;
 	char	*tmp2;
 	char	*str;
-	int		max;
 
-	str = listed_add_groups(filestat, lst);
-	max = get_largest_maj(lst) + 1;
+	str = listed_display(filestat, padding);
 	tmp = ft_itoa(major(filestat->st_rdev));
-	tmp2 = padd_it(tmp, max);
+	tmp2 = padd_it(tmp, padding->maj);
 	str = ft_strjoin_free(&str, &tmp2);
 	ft_strdel(&tmp);
 	str = ft_strjoin_free_one(&str, ",");
-	max = get_largest_min(lst) + 1;
 	tmp = ft_itoa(minor(filestat->st_rdev));
-	tmp2 = padd_it(tmp, max);
+	tmp2 = padd_it(tmp, padding->min);
 	str = ft_strjoin_free(&str, &tmp2);
 	ft_strdel(&tmp);
 	return (str);

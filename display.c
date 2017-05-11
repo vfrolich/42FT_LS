@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 14:22:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/09 15:25:20 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/11 18:29:19 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,35 +53,44 @@ int		recursable(t_file *lst, t_opt *opt)
 
 int		check_for_empty(t_file *lst, t_opt *opt)
 {
+	t_file *tmp;
+
+	tmp = lst;
 	if (opt->all)
 		return (0);
 	while (lst)
 	{
 		if (ft_strcmp(lst->name, ".") && ft_strcmp(lst->name, ".."))
+		{
+			lst = tmp;
 			return (0);
+		}
 		lst = lst->next;
 	}
+	lst = tmp;
 	return (1);
 }
 
 void	print_listed(t_file *lst, t_opt *opt)
 {
-	t_file	*start;
+	t_padd	*padding;
 
+	padding = padding_init(lst);
 	if (lst)
 		lst = sort_handle(lst, opt);
-	start = lst;
 	if (!check_for_empty(lst, opt) && opt->list)
 	{
 		ft_putstr("total ");
-		ft_putnbr(get_total_size(start, opt));
+		ft_putnbr(get_total_size(lst, opt));
 		ft_putchar('\n');
 	}
 	while (lst)
 	{
-		display_line(lst, opt, start);
+		display_line(lst, opt, padding);
 		lst = lst->next;
 	}
+	if (padding)
+		free(padding);
 }
 
 void	print_errors(t_file *lst)
