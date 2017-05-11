@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 14:33:43 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/11 18:17:47 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/11 19:18:14 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,5 @@ t_padd	*get_padding(t_file *lst, t_padd *padd)
 	padd->maj = get_largest_maj(tmp);
 	tmp = lst;
 	padd->min = get_largest_min(tmp);
-	return (padd); 
+	return (padd);
 }

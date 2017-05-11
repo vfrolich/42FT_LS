@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 10:26:22 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/09 19:28:51 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/11 15:20:38 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@ typedef struct			s_opt
 	int					t;
 }						t_opt;
 
+typedef	struct			s_padding
+{
+	size_t				user;
+	size_t				links;
+	size_t				group;
+	size_t				size;
+	size_t				maj;
+	size_t				min;
+}						t_padd;
+
 t_file					*ft_listnew(char *name);
 void					lst_add(t_file *new, t_file **start);
 t_file					*ft_create_lst(DIR *dirp, t_file *lst,
@@ -60,9 +70,7 @@ t_file					*fill_dir(t_file *lst, DIR *dirptr, t_opt *opt);
 t_file					*rd_dir(DIR *dirptr);
 int						fill_stats(t_file *lst);
 void					ft_print_lst(t_file *lst);
-char					*listed_display(struct stat *filestat, t_file *lst);
-char					*listed_add_groups(struct stat *filestat, t_file *lst);
-char					*display_fill(struct stat *filestat, t_file *lst);
+char					*listed_display(struct stat *filestat, t_padd *padding);
 void					read_link_path(t_file *lst);
 void					ft_print_recursive(t_file *lst);
 void					print_listed(t_file *lst, t_opt *opt);
@@ -82,7 +90,7 @@ size_t					get_largest_group(t_file *lst);
 size_t					get_largest_size(t_file *lst);
 size_t					get_largest_maj(t_file *lst);
 size_t					get_largest_min(t_file *lst);
-char					*get_min_maj(struct stat *filestat, t_file *lst);
+char					*get_min_maj(struct stat *filestat, t_padd *padd);
 char					*padd_it(char *str, int max);
 char					*padd_it_left(char	*str, int max);
 int						sorted_list(t_file *lst);
@@ -104,8 +112,10 @@ t_opt					*opt_fill(char *argv, t_opt *options);
 t_opt					*opt_init(void);
 int						opt_check(char *av);
 void					vanilla_ls(t_file *lst, t_opt *opt);
+t_padd					*padding_init(t_file *lst);
+t_padd					*get_padding(t_file *lst, t_padd *padd);
 t_file					*sort_handle(t_file *lst, t_opt *opt);
-void					display_infos(t_file *lst, t_file *start);
-void					display_line(t_file *lst, t_opt *opt, t_file *start);
+void					display_infos(t_file *lst, t_padd *padd);
+void					display_line(t_file *lst, t_opt *opt, t_padd *padd);
 int						recursable(t_file *lst, t_opt *opt);
 #endif
