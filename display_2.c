@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 16:07:05 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/11 18:24:16 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/13 17:44:43 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		ft_print_dir(t_file *lst, t_opt *opt, t_file *start)
 	}
 	if (S_ISDIR(lst->infos->st_mode) && lst->erref)
 	{
-		print_errors(lst);
+		print_errors(lst, opt);
 		return ;
 	}
 	print_listed(lst->dir, opt);
@@ -48,7 +48,7 @@ void		ft_print_dir_r(t_file *lst, t_opt *opt)
 	ft_putendl(":");
 	if (S_ISDIR(lst->infos->st_mode) && lst->erref)
 	{
-		print_errors(lst);
+		print_errors(lst, opt);
 		return ;
 	}
 	print_listed(lst->dir, opt);
@@ -71,13 +71,12 @@ void		print_list(t_file *lst, t_opt *opt)
 	flag = 0;
 	start = lst;
 	padding = padding_init(lst);
-	while (lst)
+	while (start)
 	{
-		if (lst->erref && !S_ISDIR(lst->infos->st_mode))
-			print_errors(lst);
-		lst = lst->next;
+		if (start->erref && !S_ISDIR(start->infos->st_mode))
+			print_errors(start, opt);
+		start = start->next;
 	}
-	lst = start;
 	while (lst)
 	{
 		if (!S_ISDIR(lst->infos->st_mode) && !lst->erref)
@@ -89,6 +88,7 @@ void		print_list(t_file *lst, t_opt *opt)
 	}
 	if (flag)
 		ft_putchar('\n');
+	free(padding);
 }
 
 int			last_dir(t_file *lst)

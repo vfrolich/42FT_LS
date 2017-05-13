@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 10:23:08 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/10 14:28:23 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/13 17:43:13 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ int		main(int argc, char **argv)
 		current_ls(options);
 	else
 		ft_ls(argv, options, i);
+	free(options);
 	return (0);
 }

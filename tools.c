@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   leaks_handle.c                                     :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 11:30:27 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/10 14:19:44 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/13 17:46:38 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,13 @@ t_file		*check_for_opt(char *name, t_opt *opt, char *base_dir, t_file *lst)
 	new->path = ft_get_path(new, lst, base_dir);
 	new->dir = ft_fill_info(new, base_dir, opt);
 	return (new);
+}
+
+void		color(char *color, char *target, int fd)
+{
+	ft_putchar_fd('\033', fd);
+	ft_putstr_fd(color, fd);
+	ft_putstr_fd(target, fd);
+	ft_putchar_fd('\033', fd);
+	ft_putstr_fd(RESET, fd);
 }

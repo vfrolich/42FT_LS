@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 14:33:43 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/11 19:18:14 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/13 15:02:32 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	display_line(t_file *lst, t_opt *opt, t_padd *padding)
 		if (opt->all && !opt->list)
 			ft_putendl(lst->name);
 		else if (opt->all && opt->list)
-			display_infos(lst, padding);
+			display_infos(lst, padding, opt);
 		return ;
 	}
 	if (opt->list)
-		display_infos(lst, padding);
+		display_infos(lst, padding, opt);
 	else
 		ft_putendl(lst->name);
 }
 
-void	display_infos(t_file *lst, t_padd *padding)
+void	display_infos(t_file *lst, t_padd *padding, t_opt *opt)
 {
 	char	*str;
 
@@ -40,7 +40,10 @@ void	display_infos(t_file *lst, t_padd *padding)
 	ft_putstr(str);
 	ft_strdel(&str);
 	str = ft_strjoin(" ", lst->name);
-	ft_putstr(str);
+	if (opt->color && S_ISDIR(lst->infos->st_mode))
+		color(CYAN, str, 1);
+	else
+		ft_putstr(str);
 	ft_strdel(&str);
 	read_link_path(lst);
 }

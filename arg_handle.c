@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 18:00:29 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/10 15:21:13 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/13 14:56:30 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_opt		*opt_fill(char *argv, t_opt *options)
 			options->reverse = 1;
 		if (*argv == 't')
 			options->t = 1;
+		if (*argv == 'G')
+			options->color = 1;
 		argv++;
 	}
 	return (options);
@@ -48,12 +50,12 @@ int			opt_check(char *av)
 		while (*av)
 		{
 			if (*av != 'a' && *av != 'l' && *av != 'R' && *av != 'r' &&
-				*av != 't')
+				*av != 't' && *av != 'G')
 			{
 				ft_putstr_fd("ft_ls: illegal option -- ", 2);
 				ft_putchar_fd(*av, 2);
 				ft_putchar_fd('\n', 2);
-				ft_putendl_fd("usage: ft_ls [-lrRat] [file ...]", 2);
+				ft_putendl_fd("usage: ft_ls [-lrRatG] [file ...]", 2);
 				exit(1);
 			}
 			av++;
@@ -76,6 +78,7 @@ t_opt		*opt_init(void)
 	opt->list = 0;
 	opt->reverse = 0;
 	opt->t = 0;
+	opt->color = 0;
 	return (opt);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 14:22:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/11 18:29:19 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/13 15:11:43 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	vanilla_ls(t_file *lst, t_opt *opt)
 			}
 		}
 		if (lst->erref && S_ISDIR(lst->infos->st_mode))
-			print_errors(lst);
+			print_errors(lst, opt);
 		lst = lst->next;
 	}
 }
@@ -93,10 +93,19 @@ void	print_listed(t_file *lst, t_opt *opt)
 		free(padding);
 }
 
-void	print_errors(t_file *lst)
+void	print_errors(t_file *lst, t_opt *opt)
 {
-	ft_putstr_fd("ft_ls: ", 2);
-	ft_putstr_fd(lst->name, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putendl_fd(strerror(lst->erref), 2);
+	if (!opt->color)
+	{
+		ft_putstr_fd("ft_ls: ", 2);
+		ft_putstr_fd(lst->name, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putendl_fd(strerror(lst->erref), 2);
+		return ;
+	}
+	color(RED, "ft_ls: ", 2);
+	color(RED, lst->name, 2);
+	color(RED, ": ", 2);
+	color(RED, strerror(lst->erref), 2);
+	ft_putchar_fd('\n', 2);
 }

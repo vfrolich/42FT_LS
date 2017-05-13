@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 20:18:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/09 16:13:34 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/13 15:12:25 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_file	*rd_dir(DIR *dirptr)
 	{
 		new = ft_listnew("error");
 		new->erref = errno;
-		print_errors(new);
+		print_errors(new, NULL);
 		return (new);
 	}
 	if (!info && !errno)

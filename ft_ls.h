@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 10:26:22 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/05/11 15:20:38 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/05/13 15:10:38 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <dirent.h>
 # include <errno.h>
 # include <time.h>
+# define RED "[31m"
+# define CYAN "[36m"
+# define RESET "[39m"
 
 typedef	struct			s_file
 {
@@ -41,6 +44,7 @@ typedef struct			s_opt
 	int					list;
 	int					reverse;
 	int					t;
+	int					color;
 }						t_opt;
 
 typedef	struct			s_padding
@@ -75,7 +79,7 @@ void					read_link_path(t_file *lst);
 void					ft_print_recursive(t_file *lst);
 void					print_listed(t_file *lst, t_opt *opt);
 void					recursive_listed(t_file	*lst, t_opt *opt);
-void					print_errors(t_file *lst);
+void					print_errors(t_file *lst, t_opt *opt);
 void					ft_print_dir(t_file *lst, t_opt *opt, t_file *start);
 void					ft_print_dir_r(t_file *lst, t_opt *opt);
 void					print_dir_one(t_file *lst, t_opt *opt);
@@ -115,7 +119,8 @@ void					vanilla_ls(t_file *lst, t_opt *opt);
 t_padd					*padding_init(t_file *lst);
 t_padd					*get_padding(t_file *lst, t_padd *padd);
 t_file					*sort_handle(t_file *lst, t_opt *opt);
-void					display_infos(t_file *lst, t_padd *padd);
+void					display_infos(t_file *lst, t_padd *padd, t_opt *opt);
 void					display_line(t_file *lst, t_opt *opt, t_padd *padd);
 int						recursable(t_file *lst, t_opt *opt);
+void					color(char *color, char *target, int fd);
 #endif
